@@ -18,13 +18,17 @@ def get_student_prediction_result(prediction: int, propability: float):
     result= "At risk" if prediction == 1 else "Not at risk"
     prob_at_risk= round(propability[1],3)
     prob_not_at_risk= round(propability[0],3)
-    prob_percentage= round(prob_at_risk*100,2) if result =="At risk" else round(prob_not_at_risk*100,2)
+    risk_percentage= round(prob_at_risk*100,2)
+    not_at_risk_percentage= round(prob_not_at_risk*100,2)
+    confidence_percentage= round(max(prob_at_risk, prob_not_at_risk)*100,2)
     return {
         "result": result,
         "probability": {
             "at_risk": prob_at_risk,
             "not_at_risk": prob_not_at_risk,
         },
-        "model_percentage": prob_percentage,
+        "risk_percentage": risk_percentage,
+        "not_at_risk_percentage": not_at_risk_percentage,
+        "model_percentage": confidence_percentage,
         "human_required": True 
     }
